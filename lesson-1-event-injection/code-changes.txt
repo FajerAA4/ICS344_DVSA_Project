@@ -1,1 +1,32 @@
+Modified Resource:
+DVSA-ORDER-MANAGER / order-manager.js
 
+Changes Applied:
+
+1. Replaced:
+   var req = serialize.unserialize(event.body);
+
+   With:
+   var req = JSON.parse(event.body);
+
+2. Replaced:
+   var headers = serialize.unserialize(event.headers);
+
+   With:
+   var headers = event.headers || {};
+
+3. Replaced:
+   var auth_header = headers.Authorization || headers.authorization;
+
+   With:
+   var auth_header = headers.Authorization || headers.authorization || "";
+
+4. Added missing authorization validation:
+
+   if (!auth_header) {
+       return callback(null, {
+           statusCode: 401,
+           headers: { "Access-Control-Allow-Origin": "*" },
+           body: JSON.stringify({ status: "err", message: "Missing authorization" })
+       });
+   }
