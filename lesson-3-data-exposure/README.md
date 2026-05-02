@@ -80,8 +80,6 @@ def lambda_handler(event, context):
 
 The check runs **before** the function builds an S3 client, lists objects, generates the ZIP, or creates a pre-signed URL. A non-admin request returns immediately with a generic error and never touches S3. The check accepts both `True` (boolean) and `"true"` (string) so the function works whether the caller is API Gateway (which serializes everything to strings) or another Lambda (which can pass real booleans).
 
-> ⚠️ This is a starting fix. The most robust version reads the caller's identity from the verified JWT (`token["scope"]` or a Cognito group claim) instead of trusting an `isAdmin` field in the event body, since clients shouldn't be able to set their own admin flag. For this lesson the `isAdmin` check is enough to demonstrate the principle and stop the exploit.
-
 ## Verification
 
 Re-run the same `{ "year": "2026", "month": "04" }` test event after deploying the patch. The Lambda now returns:
