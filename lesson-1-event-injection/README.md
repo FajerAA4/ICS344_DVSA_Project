@@ -2,7 +2,7 @@
 
 ## Goal & Summary
 
-The `DVSA-ORDER-MANAGER` Lambda function is the central API handler for DVSA — every request to the `/order` endpoint goes through it. In its vulnerable state it deserializes the raw HTTP body using [`node-serialize`](https://www.npmjs.com/package/node-serialize), a Node.js library known for [GHSA-q4v7-4rhw-9hqm](https://github.com/advisories/GHSA-q4v7-4rhw-9hqm) — a **critical Remote Code Execution** vulnerability with no patch. The library deserializes JavaScript functions encoded with the marker `_$$ND_FUNC$$_`, and if the encoded function ends with `()` it becomes an Immediately Invoked Function Expression that runs the moment the payload is parsed.
+The `DVSA-ORDER-MANAGER` Lambda function is the central API handler for DVSA — every request to the `/order` endpoint goes through it. In its vulnerable state it deserializes the raw HTTP body using [`node-serialize`], a Node.js library known for — a **critical Remote Code Execution** vulnerability with no patch. The library deserializes JavaScript functions encoded with the marker `_$$ND_FUNC$$_`, and if the encoded function ends with `()` it becomes an Immediately Invoked Function Expression that runs the moment the payload is parsed.
 
 This lesson:
 - Demonstrates the exploit by sending a malicious payload through the public API endpoint
