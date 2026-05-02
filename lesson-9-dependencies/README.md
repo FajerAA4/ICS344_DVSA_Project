@@ -2,7 +2,7 @@
 
 ## Goal & Summary
 
-The `DVSA-ORDER-MANAGER` Lambda function uses [`node-serialize`](https://www.npmjs.com/package/node-serialize), a Node.js library known for [GHSA-q4v7-4rhw-9hqm](https://github.com/advisories/GHSA-q4v7-4rhw-9hqm) — a **critical Remote Code Execution** vulnerability with no patch. The library deserializes JavaScript functions encoded with the marker `_$$ND_FUNC$$_`. If the encoded function ends with `()`, it becomes an Immediately Invoked Function Expression and runs the moment the payload is parsed.
+The `DVSA-ORDER-MANAGER` Lambda function uses [`node-serialize`], a Node.js library known for — a **critical Remote Code Execution** vulnerability with no patch. The library deserializes JavaScript functions encoded with the marker `_$$ND_FUNC$$_`. If the encoded function ends with `()`, it becomes an Immediately Invoked Function Expression and runs the moment the payload is parsed.
 
 The function passes the raw HTTP body to `serialize.unserialize()` with no validation, so an attacker can put arbitrary JavaScript inside a JSON body and have it execute on the Lambda runtime — which means filesystem access, environment variables (Cognito secrets, database creds), and the function's IAM role.
 
