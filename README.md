@@ -32,8 +32,6 @@ This repository documents ten serverless security lessons performed on the **OWA
 | [9](./lesson-09-vulnerable-dependencies) | Vulnerable Dependencies | `node-serialize` (no patch available) enabled RCE | `DVSA-ORDER-MANAGER` Lambda | Code: remove `node-serialize`, use `JSON.parse()` |
 | 10 | Unhandled Exceptions | Missing input validation/exception handling leaked stack traces and file paths | `DVSA-ORDER-BILLING` Lambda | Code: add input validation + generic error responses |
 
-> Lessons linked above (1, 3, 5, 7, 9) have full standalone walkthroughs in their own folders. The remaining lessons (2, 4, 6, 8, 10) are summarized below and documented in the main project report.
-
 ---
 
 ## How this repo is organized
