@@ -1,13 +1,9 @@
-// DVSA-ORDER-MANAGER — order-manager.js (PATCHED)
-//
+// DVSA-ORDER-MANAGER — order-manager.js 
 // Changes from the vulnerable version:
 //   1. Removed:  const serialize = require('node-serialize');
 //   2. Replaced serialize.unserialize() with native JSON.parse() on
 //      both event.body and event.headers.
 //   3. Run `npm uninstall node-serialize` to drop the dependency.
-//
-// JSON.parse() only produces plain data and cannot evaluate functions,
-// so the _$$ND_FUNC$$_ marker is just a string and never runs.
 
 const { LambdaClient, InvokeCommand } = require("@aws-sdk/client-lambda");
 const { CognitoIdentityProviderClient, AdminGetUserCommand } = require("@aws-sdk/client-cognito-identity-provider");
@@ -25,5 +21,4 @@ exports.handler = (event, context, callback) => {
     var token = JSON.parse(auth_data);
     var user = token.username;
 
-    // ... rest of handler unchanged ...
 };
