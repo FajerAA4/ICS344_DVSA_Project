@@ -57,8 +57,7 @@ CloudWatch → Log groups → `/aws/lambda/DVSA-ORDER-MANAGER` → newest log st
 FILE READ SUCCESS: TEST WORKED
 ```
 
-![CloudWatch log proves RCE](./screenshots/03-before-fix-cloudwatch-rce-proof.png)
-
+![CloudWatch log proves RCE](./screenshots/Screenshot%202026-05-04%20194611.png)
 This proves the attacker's JavaScript ran inside the Lambda — full filesystem access, environment variables, and IAM role permissions are all reachable.
 
 ## Fix
