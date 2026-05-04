@@ -1,10 +1,4 @@
 // DVSA-ORDER-MANAGER — order-manager.js (VULNERABLE — DO NOT DEPLOY)
-//
-// This snippet shows the relevant top of the file as it ships in the
-// vulnerable version of DVSA. Lines 9 and 10 are the bug: both
-// event.body and event.headers are passed through node-serialize's
-// unserialize(), which evaluates any function embedded with the
-// _$$ND_FUNC$$_ marker.
 
 const serialize = require('node-serialize');                                     //vulnerable dep
 const { LambdaClient, InvokeCommand } = require("@aws-sdk/client-lambda");
@@ -21,5 +15,4 @@ exports.handler = (event, context, callback) => {
     var token = JSON.parse(auth_data);
     var user = token.username;
 
-    // ... rest of handler ...
 };
