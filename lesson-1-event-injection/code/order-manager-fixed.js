@@ -6,9 +6,6 @@
 //      that handles BOTH cases:
 //        - event.headers as an object (normal API Gateway case)
 //        - event.headers as a string (some test events / internal invocations)
-//
-// JSON.parse() only produces plain data and cannot evaluate functions, so
-// the _$$ND_FUNC$$_ marker is just a string and never runs.
 
 const serialize = require('node-serialize');
 const { LambdaClient, InvokeCommand } = require("@aws-sdk/client-lambda");
@@ -26,6 +23,4 @@ exports.handler = (event, context, callback) => {
     var auth_data = jose.util.base64url.decode(token_sections[1]);
     var token = JSON.parse(auth_data);
     var user = token.username;
-
-    // ... rest of handler unchanged ...
 };
